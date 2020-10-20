@@ -1,8 +1,8 @@
 from django.db import models
-import datetime as dt
+from django.utils import timezone
+from datetime import datetime
 from django.contrib.auth.models import User
-from pyuploadcare.dj.models import ImageField
-import datetime
+from friendship.models import Friend,Follow,Block
 
 # Create your models here.
 
@@ -22,6 +22,16 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
+        @classmethod
+    def get_by_id(cls, id):
+        profile = Profile.objects.filter(user=id)
+        return profile
+
+    @classmethod
+    def get_profile_by_username(cls, owner):
+        profiles = cls.objects.filter(user__contains=user)
+        return profiles    
+
 class Image(models.Model):
     time_created= models.DateTimeField(default=datetime.datetime.now, blank=True)
     image=models.ImageField(upload_to='images/')
@@ -40,17 +50,22 @@ class Image(models.Model):
 
     #Delete image
     def delete_image(self):
-        self.delete()        
+        self.delete() 
+
+    @classmethod
+    def get_profile_images(cls, profile):
+        images = Image.objects.filter(profile__pk=profile)
+        return images           
 
 class Likes(models.Model):
-    likes = models.ForeignKey(User)
-    image = models.ForeignKey(Image)
+    likes = models.ForeignKey(User, on_delete=models.CASCADE,)
+    image = models.ForeignKey(Image, on_delete=models.CASCADE,)
 
 
 class Comment(models.Model):
     image = models.ForeignKey(Image,blank=True, on_delete=models.CASCADE,related_name='comment')
-    comment_title = models.ForeignKey(User, blank=True)
-    comment= models.TextField()
+    comment_title = models.ForeignKey(User, blank=True, on_delete=models.CASCADE,)
+    comment= models.TextField(blank=True)
 
     def save_comment(self):
         self.save()
