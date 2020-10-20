@@ -35,4 +35,9 @@ def profile(request):
     else:
         form=ProfileForm()
 
-    return render(request, 'profile/new_user.html', locals())      
+    return render(request, 'profile/new_user.html', locals())    
+@login_required(login_url='/login')
+def explore(request):
+    images = Image.objects.all()
+    all_profiles = Profile.objects.all()
+    return render(request, 'explore.html',{'images': images,'all_profiles' : all_profiles })
