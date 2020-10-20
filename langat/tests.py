@@ -19,3 +19,24 @@ class ProfileTescase(TestCase):
         self.profile.save_profile()
         images = Image.objects.all()
         self.assertTrue(len(images)> 0)
+
+class ImageTestClass(TestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.user.objects.create_user('langat')
+        cls.new_profile = Profile (profile_pic='')    
+        cls.new_image = Image(my_image='', caption='Corona', profile=cls.new_profile)
+
+    def test_instance_true(cls):
+        cls.assertTrue(isinstance(cls.new_image, Image))
+
+    def test_save_image_method(self):
+        self.new_image.save_image()
+        images = Image.objects.all()
+        self.assertTrue(len(images) == 1)
+
+    def tearDown(self):
+        Image.objects.all().delete()
+        Profile.objects.all().delete()
+        User.objects.all().delete()      
