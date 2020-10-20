@@ -20,8 +20,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url('admin/', admin.site.urls),
-    url('', include('instagram.urls')),
-    url('accounts/', include('registration.backends.simple.urls')),
-    url('logout/', views.logout,{"next_page":'/'}),
+    url(r'^admin/', admin.site.urls),
+    url(r'', include('instagram.urls')),
+    url(r'accounts/', include('registration.backends.simple.urls')),
+    url(r'logout/$', views.logout, {"next_page": '/'}),
 ]
