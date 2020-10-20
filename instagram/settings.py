@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'langat',
     'bootstrap4',
     'pyuploadcare',
+    'friendship',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
