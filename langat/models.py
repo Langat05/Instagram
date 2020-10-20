@@ -40,3 +40,27 @@ class Image(models.Model):
     #Delete image
     def delete_image(self):
         self.delete()        
+
+class Likes(models.Model):
+    likes = models.ForeignKey(User)
+    image = models.ForeignKey(Image)
+
+
+class Comment(models.Model):
+    image = models.ForeignKey(Image,blank=True, on_delete=models.CASCADE,related_name='comment')
+    comment_title = models.ForeignKey(User, blank=True)
+    comment= models.TextField()
+
+    def save_comment(self):
+        self.save()
+
+    def delete_comment(self):
+        self.delete()
+
+    @classmethod
+    def get_image_comments(cls, id):
+        comments = Comment.objects.filter(image__pk=id)
+        return comments
+
+    def __str__(self):
+        return str(self.comment)        
