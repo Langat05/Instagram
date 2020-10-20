@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Image, Profile,Comment,Follow,Likes
+from django.http import HttpResponse, Http404
+from friendship.exceptions import AlreadyExistsError
+from .forms import MessageForm, ProfileForm, ImageForm, CommentForm
 
 
 
@@ -88,4 +91,19 @@ def comment(request,image_id):
     else:
         form = CommentForm()
 
-    return render(request, 'comment.html', locals())    
+    return render(request, 'comment.html', locals())  
+
+def follow(request,user_id):
+    users=User.objects.get(id=user_id)
+    follow = Follow.objects.add_follower(request.user, users)
+
+    return redirect('/profile/', locals())
+
+
+def like(request, image_id):
+    current_user = request.user
+    image=Image.objects.get(id=image_id)
+    new_like,created= Likes.objects.get_or_create(likes=current_user, image=image)
+    new_like.save()
+
+    return redirect('home')      
