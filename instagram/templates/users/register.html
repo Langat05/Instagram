@@ -1,0 +1,29 @@
+{% extends 'users/base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<div class="container">
+        <div class="col-md-5">
+            {% if form.errors %}
+                <p>Ensure that you details are correct</p>
+            {% endif %}
+            <div class="signup-fields">
+                    <div class="form-section">
+                        <h4 class="text-center intro">Welcome to Instagram, please signup to get in touch with friends</h4>
+                        <form method="post">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary btn-sm login" value="Sign up">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="section">
+                    <p class="text-center mt-2">Have an account? <a href="#">Log In</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
