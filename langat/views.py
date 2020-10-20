@@ -35,7 +35,8 @@ def profile(request):
     else:
         form=ProfileForm()
 
-    return render(request, 'profile/new_user.html', locals())    
+    return render(request, 'profile/new_user.html', locals())
+
 @login_required(login_url='/login')
 def explore(request):
     images = Image.objects.all()
@@ -56,16 +57,16 @@ def add_image(request):
         form = ImageForm()
     return render(request,'image.html',locals())
 
-@login_required(login_url='/login')
-def profile(request):
-    current_user = request.user
-    if request.method == 'POST':
-        form = ProfileForm(request.POST,request.FILES)
-        if form.is_valid():
-            profile =form.save(commit=False)
-            profile.user = current_user
-            profile.save()
-    else:
-        form=ProfileForm()
+@login_required(login_url='/accounts/login/')
+def display_profile(request, id):
+    seekuser=User.objects.filter(id=id).first()
+    profile = seekuser.profile
+    images = Image.get_profile_images(id)
 
-    return render(request, 'profile/new_user.html', locals())
+    users = User.objects.get(id=id)
+    follower = len(Follow.objects.followers(users))
+    following = len(Follow.objects.following(users))
+    people=User.objects.all()
+    pip_following=Follow.objects.following(request.user)
+
+    return render(request,'profile/profile.html',locals())
