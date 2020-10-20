@@ -1,18 +1,18 @@
-from django.conf.urls import url
+from django.conf.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 
 
 urlpatterns = [
-    url(r'^$',views.home,name='home'),
-    url(r'^newprofile/',views.profile,name ='profile'),
-    url(r'^showprofile/(?P<id>\d+)',views.display_profile,name = 'showprofile'),
-    url(r'^image/$', views.add_image, name='upload_image'),
-    url(r'^ search/',views.search, name='search'),
-    url(r'explore/', views.explore, name='explore'),
-    url(r'^comment/(?P<image_id>\d+)', views.comment, name='comment'),
-    url(r'^like/(?P<image_id>\d+)', views.like, name='like'),
-    url(r'^follow/(?P<user_id>\d+)', views.follow, name='follow'
+    path('',views.home,name='home'),
+    path('newprofile/',views.profile,name ='profile'),
+    path('showprofile/(?P<id>\d+)',views.display_profile,name = 'showprofile'),
+    path('image/$', views.add_image, name='upload_image'),
+    path('search/',views.search, name='search'),
+    path('explore/', views.explore, name='explore'),
+    path('comment/(?P<image_id>\d+)', views.comment, name='comment'),
+    path('like/(?P<image_id>\d+)', views.like, name='like'),
+    path('follow/(?P<user_id>\d+)', views.follow, name='follow'
  
 ]
