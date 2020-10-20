@@ -4,25 +4,26 @@
 {% block content  %}
 
 <div class="container"><br>
-  <h2 class='text-center'> Suggested for you </h2>
+    <h2 class='text-center'> Suggested for you </h2>
     <div class="row">
-    {% for post in images %}
+        {% for post in images %}
         <div class="col-md-4"><br>
             <h2 class="card-header"> {{post.profile.user.username}} {{post.user}}</h2>
-            <img class="img-fluid" src="{{ post.image.url }}" alt="image" style="width:500px; height:350px; border-radius:50%;">
+            <img class="img-fluid" src="{{ post.image.url }}" alt="image"
+                style="width:500px; height:350px; border-radius:50%;">
             <div class='text-center'><br>
-            <button class='btn btn-primary'  id="button">Follow {{user.username}}</button>
+                <button class='btn btn-primary' id="button">Follow {{user.username}}</button>
             </div>
         </div>
-    {% endfor %}
+        {% endfor %}
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-$(document).ready(function(){
-  $("#button").click(function(){
-    $("h2").append(" <br> You are now following {{user.username}}");
-  });
-});
+    $(document).ready(function () {
+        $("#button").click(function () {
+            $("h2").append(" <br> You are now following {{user.username}}");
+        });
+    });
 </script>
 {% endblock %}

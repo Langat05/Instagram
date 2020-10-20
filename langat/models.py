@@ -33,7 +33,7 @@ class Profile(models.Model):
         return profiles    
 
 class Image(models.Model):
-    time_created= models.DateTimeField(default=datetime.datetime.now, blank=True)
+    time_created= models.DateTimeField(default=datetime.now, blank=True)
     image=models.ImageField(upload_to='images/')
     message = models.CharField(max_length=80, blank=True)
     name = models.CharField(max_length=80)
