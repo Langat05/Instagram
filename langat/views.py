@@ -41,3 +41,31 @@ def explore(request):
     images = Image.objects.all()
     all_profiles = Profile.objects.all()
     return render(request, 'explore.html',{'images': images,'all_profiles' : all_profiles })
+
+@login_required(login_url='accounts/login/')
+def add_image(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            add=form.save(commit=False)
+            add.profile = current_user
+            add.save()
+            return redirect('home')
+    else:
+        form = ImageForm()
+    return render(request,'image.html',locals())
+
+@login_required(login_url='/login')
+def profile(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = ProfileForm(request.POST,request.FILES)
+        if form.is_valid():
+            profile =form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+    else:
+        form=ProfileForm()
+
+    return render(request, 'profile/new_user.html', locals())
