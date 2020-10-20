@@ -22,7 +22,7 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
-        @classmethod
+    @classmethod
     def get_by_id(cls, id):
         profile = Profile.objects.filter(user=id)
         return profile
