@@ -106,4 +106,10 @@ def like(request, image_id):
     new_like,created= Likes.objects.get_or_create(likes=current_user, image=image)
     new_like.save()
 
-    return redirect('home')      
+    return redirect('home')  
+
+@login_required(login_url='/accounts/login/')
+def messages(request):
+    images = Image.objects.all()
+    messageform = MessageForm()
+    return render(request, 'messages.html',{'images': images, 'messageform':messageform})        
