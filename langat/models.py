@@ -2,6 +2,7 @@ from django.db import models
 import datetime as dt
 from django.contrib.auth.models import User
 from pyuploadcare.dj.models import ImageField
+import datetime
 
 # Create your models here.
 
@@ -22,7 +23,7 @@ class Profile(models.Model):
         self.delete()
 
 class Image(models.Model):
-    time_created= models.DateTimeField(default=datetime.now, blank=True)
+    time_created= models.DateTimeField(default=datetime.datetime.now, blank=True)
     image=models.ImageField(upload_to='images/')
     message = models.CharField(max_length=80, blank=True)
     name = models.CharField(max_length=80)

@@ -27,12 +27,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+UPLOADCARE = {
+    'pub_key': '123456',
+    'secret': '98765'
+}
 # Application definition
 
 INSTALLED_APPS = [
-    'instagram',
+    'django_registration',
+    'langat',
     'bootstrap4',
+    'pyuploadcare',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -123,3 +128,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
