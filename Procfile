@@ -1,0 +1,1 @@
+web: gunicorn langat.wsgi --log-file -
