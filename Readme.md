@@ -32,7 +32,7 @@ pip install -r requirements.txt
 - Git
 
 # Bugs
-Only the users added by the admin can be able to login and make posts
+Can't search other users
 
 # Codebeat
 [![codebeat badge](https://codebeat.co/badges/6978c2bd-2706-40e2-8d94-7c7a3bd578e6)](https://codebeat.co/projects/github-com-langat05-instagram-master)
