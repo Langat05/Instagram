@@ -26,7 +26,7 @@ def search(request):
         return render(request,'search.html',locals())
     return redirect(home)  
 
-@login_required(login_url='/login')
+@login_required(login_url='/accounts/login')
 def profile(request):
     current_user = request.user
     if request.method == 'POST':
@@ -40,7 +40,7 @@ def profile(request):
 
     return render(request, 'profile/new_user.html', locals())
 
-@login_required(login_url='/login')
+@login_required(login_url='accounts/login')
 def explore(request):
     images = Image.objects.all()
     all_profiles = Profile.objects.all()

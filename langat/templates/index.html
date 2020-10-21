@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-8">
             {% for image in all_images %}
-            <div class="card">
+            <div class="container" style="padding-left: 50%;">
                 <a href="{% url 'showprofile' image.profile.id %}"> 
                     {% if image.profile_pic %}
                     <img src="{{image.profile_pic.url}}" style=" width:100px;height:100px; border-radius:50%;">

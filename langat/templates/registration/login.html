@@ -1,4 +1,4 @@
-{% extends 'users/base.html' %}
+{% extends 'django_registration/base.html' %}
 {% load bootstrap4 %}
 {% block content %}
 <div class="container">
@@ -9,7 +9,7 @@
             {% endif %}
             <div class="section">
                 <div class="form-section" id="login">
-                    <form action="#" method="POST">
+                    <form action="/accounts/login/" method="POST">
                         {% csrf_token %}
                         {% bootstrap_form form %}
                         <div class="form-group">
@@ -21,7 +21,7 @@
                 <p class="text-center"><a href="#">Forgot password?</a></p>
             </div>
             <div class="section">
-                <p class="text-center mt-2">Don't have an account?<a href="#"> Sign Up</a></p>
+                <p class="text-center mt-2">Don't have an account?<a href="/accounts/register"> Sign Up</a></p>
             </div>
         </div>
     </div>
