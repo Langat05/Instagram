@@ -6,6 +6,7 @@ from . import views
 
 urlpatterns = [
     path('',views.home, name='home'),
+    path('messages/', views.messages,name='messages'),
     path('newprofile/',views.profile, name ='profile'),
     path('showprofile/<int:pk>/', views.display_profile,name = 'showprofile'),
     path('image/', views.add_image, name='upload_image'),

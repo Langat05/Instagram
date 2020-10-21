@@ -10,34 +10,31 @@
         <div class="col-md-8">
             {% for image in all_images %}
             <div class="card">
-                <a href="{% url 'showprofile' id=image.profile.id %}">
+                <a href="{% url 'showprofile' image.profile.id %}"> 
                     {% if image.profile_pic %}
                     <img src="{{image.profile_pic.url}}" style=" width:100px;height:100px; border-radius:50%;">
                     {{image.profile.username}}</a>
                 {% else %}
-                <img src="/static/images/IMG_2046.jpg" class="rounded-circle" style=" width:80px;height:80px;"
+                <img src="/static/images/default.jpg" class="rounded-circle" style=" width:80px;height:80px;"
                     alt="avatar">
                 <b>{{image.profile.username}}</b></a>
                 {% endif %}
                 <div class="card-img-top img-responsive">
                     <img src="{{image.image.url}}" style="width: 500px; height: 350px;" alt="Image"></div>
-                <div class="container"><br>
-                    <ul class="list-inline text-black">
+              
+                    <div class="container"><br>
+                        <ul class="list-inline text-black">
                         <li class="list-inline-item">
-                            <a href=" {% url 'comment' image_id=image.id %}">
-                                <a href=" {% url 'like' image_id=image.id %}">
-                                    <i class="fa fa-heart fa-2x" style="font-size:30px;color:red"
-                                        aria-hidden="true"></i>{{likes|length}} likes</a>
-                                <a href=" {% url 'comment' image_id=image.id %}">
-                                    <i class="fa fa-comment-o fa-2x" aria-hidden="true" style="color:black;"></i>
-                                    {{image.comment.count}} </a>
-                                <a href="{% url 'messages' %}">
-                                    <i class="fa fa-paper-plane-o fa-2x"></i><a href="/messages/ {{image.message}}"></a>
-                                    <i class="fa fa-bookmark" style="float: right; font-size:30px;"></i><a
-                                        class="text-center" href="#"></a>
+                            {{ image.like }}
+                            <i class="fa fa-heart fa-2x" style="font-size:30px;color:red" aria-hidden="true"></i>{{likes|length}} likes</a>
+                            <i class="fa fa-comment-o fa-2x" aria-hidden="true" style="color:black;"></i> {{image.comment.count}} </a>
+                            {{ image.messages }}
+                            <i class="fa fa-paper-plane-o fa-2x"></i><a href="/messages/ {{image.message}}"></a>
+                            <i class="fa fa-bookmark" style="float: right; font-size:30px;"></i><a class="text-center" href="#"></a>
                         </li>
-                    </ul>
-                    <h3> {{image.caption}}</h3>
+                        </ul>
+                        <h1>{{ image.name }}</h1>
+                        <p> {{image.caption}}</p>
                     <div class="card-body ">
                         {% for comment in comments %}
                         {% if comment.image_id == image.id%}
@@ -45,12 +42,12 @@
                         <p>{{image.time_created}}</p>
                         <hr>
                         <p class="text-muted">Add Comment...</p>
-                        <br>
+                    <br>
                         {% endif %}
                         {% endfor %}
                     </div>
-                </div>
-            </div>
+                    </div>
+          </div>
             {% empty %}<br>
             <div class="jumbotron text-center">
 
